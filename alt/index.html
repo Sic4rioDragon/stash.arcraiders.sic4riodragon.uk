@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Alt Stash - Sic4rio ARC Stash</title>
+  <meta name="description" content="Alt stash tracker for ARC Raiders." />
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+  <div class="page-bg"></div>
+  <div class="page-overlay"></div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">ARC Raiders</p>
+        <h1>Alt Stash</h1>
+        <p class="subtext">Static stash view loaded from <code>stash.core.json</code> + <code>stash.alt.json</code>.</p>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn primary" href="../data/stash.alt.json" target="_blank" rel="noopener">Open alt JSON</a>
+        <a class="btn" href="../data/stash.core.json" target="_blank" rel="noopener">Open core JSON</a>
+        <button id="reloadBtn" class="btn">Reload data</button>
+        <button id="exportBtn" class="btn">Export backup</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar card">
+        <div class="profile-block">
+          <p class="small-label">Profile</p>
+          <div id="profileTabs" class="profile-tabs"></div>
+        </div>
+
+        <div class="stats">
+          <div>
+            <span id="totalItems">0</span>
+            <p>Item types</p>
+          </div>
+          <div>
+            <span id="totalQuantity">0</span>
+            <p>Total quantity</p>
+          </div>
+        </div>
+
+        <div class="filters">
+          <label>
+            Search
+            <input id="searchInput" type="search" placeholder="Powercell, grenade, ammo..." />
+          </label>
+
+          <label>
+            Category
+            <select id="categoryFilter">
+              <option value="all">All categories</option>
+            </select>
+          </label>
+
+          <label>
+            Rarity
+            <select id="rarityFilter">
+              <option value="all">All rarities</option>
+            </select>
+          </label>
+
+          <label class="check-row">
+            <input id="ownedOnly" type="checkbox" checked />
+            Owned only
+          </label>
+        </div>
+
+        <div class="hint">
+          Core stores item names/images/rarity/category. Alt JSON only stores quantities, flags, currencies, and loadout.
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="card hero-card">
+          <div>
+            <p class="eyebrow">Current stash</p>
+            <h2 id="profileTitle">Alt</h2>
+            <p id="lastUpdated" class="subtext">Loading...</p>
+          </div>
+
+          <div class="view-tabs">
+            <button class="view-tab active" data-view="grid">Grid</button>
+            <button class="view-tab" data-view="table">Table</button>
+          </div>
+        </section>
+
+        <section id="loadoutSection" class="card loadout-section hidden">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Loadout</p>
+              <h2>Equipped / carried</h2>
+            </div>
+          </div>
+          <div id="loadoutGrid" class="loadout-grid"></div>
+        </section>
+
+        <section id="emptyState" class="card empty-state hidden">
+          <h2>No stash data found</h2>
+          <p>
+            Check that <code>data/stash.core.json</code> and <code>data/stash.alt.json</code> exist.
+          </p>
+        </section>
+
+        <section id="inventoryGrid" class="inventory-grid"></section>
+
+        <section id="inventoryTableWrap" class="card table-wrap hidden">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Rarity</th>
+                <th>Category</th>
+                <th>Flags</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTable"></tbody>
+          </table>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <template id="itemCardTemplate">
+    <article class="item-card">
+      <div class="item-top">
+        <div class="item-icon">
+          <span></span>
+        </div>
+        <div>
+          <h3></h3>
+          <p></p>
+        </div>
+      </div>
+
+      <div class="item-meta">
+        <span class="pill rarity"></span>
+        <span class="pill category"></span>
+      </div>
+
+      <div class="item-bottom">
+        <strong></strong>
+        <small></small>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    window.STASH_CONFIG = {
+      pageTitle: "Alt",
+      coreFile: "../data/stash.core.json",
+      stashFile: "../data/stash.alt.json"
+    };
+  </script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>
