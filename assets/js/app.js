@@ -412,19 +412,20 @@ function createItemCard(item, compact = false) {
   card.dataset.itemId = item.id;
   card.classList.toggle("compact", compact);
 
-  const badge = `<span class="qty-badge">${Number(item.quantity || 0).toLocaleString()}</span>`;
-
   if (item.image) {
-    icon.innerHTML = `<img src="${escapeHtml(item.image)}" alt="">${badge}`;
+    icon.innerHTML = `<img src="${escapeHtml(item.image)}" alt="">`;
   } else {
     iconText.textContent = firstLetters(item.name);
-    icon.insertAdjacentHTML("beforeend", badge);
   }
 
   title.textContent = item.name;
 
+  const meta = getMeta(item.id);
+
   if (item.stackIndex) {
     subtitle.textContent = `Stack ${item.stackIndex} • Total ${item.totalQuantity.toLocaleString()}`;
+  } else if (meta.ammoType) {
+    subtitle.textContent = `${item.id} • ${meta.ammoType}`;
   } else if (item.notes) {
     subtitle.textContent = item.notes;
   } else {
@@ -434,7 +435,7 @@ function createItemCard(item, compact = false) {
   rarity.textContent = item.rarity;
   rarity.classList.add(rarityClass(item.rarity));
 
-  category.textContent = item.category;
+  category.textContent = meta.ammoType || item.category;
 
   quantity.textContent = Number(item.quantity || 0).toLocaleString();
   notes.textContent = item.quantity === 1 ? "item" : "items";

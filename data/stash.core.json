@@ -115,7 +115,11 @@
       "name": "Arpeggio I",
       "rarity": "Uncommon",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/arpeggio_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/arpeggio_i.png",
+      "ammoType": "Medium Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "assorted_seeds": {
       "id": "assorted_seeds",
@@ -178,7 +182,11 @@
       "name": "Burletta I",
       "rarity": "Uncommon",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/burletta_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/burletta_i.png",
+      "ammoType": "Light Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "camera_lens": {
       "id": "camera_lens",
@@ -199,7 +207,11 @@
       "name": "Canto I",
       "rarity": "Rare",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/canto_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/canto_i.png",
+      "ammoType": "Medium Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "cat_bed": {
       "id": "cat_bed",
@@ -409,14 +421,22 @@
       "name": "Ferro I",
       "rarity": "Common",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/ferro_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/ferro_i.png",
+      "ammoType": "Heavy Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "ferro_iv": {
       "id": "ferro_iv",
       "name": "Ferro IV",
       "rarity": "Common",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/ferro_iv.png"
+      "image": "https://cdn.arctracker.io/items/v2/ferro_iv.png",
+      "ammoType": "Heavy Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "fireball_burner": {
       "id": "fireball_burner",
@@ -458,14 +478,22 @@
       "name": "Hairpin I",
       "rarity": "Common",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/hairpin_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/hairpin_i.png",
+      "ammoType": "Light Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "hairpin_ii": {
       "id": "hairpin_ii",
       "name": "Hairpin II",
       "rarity": "Common",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/hairpin_ii.png"
+      "image": "https://cdn.arctracker.io/items/v2/hairpin_ii.png",
+      "ammoType": "Light Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "heavy_ammo": {
       "id": "heavy_ammo",
@@ -507,14 +535,22 @@
       "name": "Il Toro I",
       "rarity": "Uncommon",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/il_toro_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/il_toro_i.png",
+      "ammoType": "Shotgun Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "il_toro_ii": {
       "id": "il_toro_ii",
       "name": "Il Toro II",
       "rarity": "Uncommon",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/il_toro_ii.png"
+      "image": "https://cdn.arctracker.io/items/v2/il_toro_ii.png",
+      "ammoType": "Shotgun Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "impure_arc_coolant": {
       "id": "impure_arc_coolant",
@@ -542,7 +578,11 @@
       "name": "Kettle I",
       "rarity": "Common",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/kettle_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/kettle_i.png",
+      "ammoType": "Light Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "lemon": {
       "id": "lemon",
@@ -795,14 +835,22 @@
       "name": "Rattler I",
       "rarity": "Common",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/rattler_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/rattler_i.png",
+      "ammoType": "Medium Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "rattler_ii": {
       "id": "rattler_ii",
       "name": "Rattler II",
       "rarity": "Common",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/rattler_ii.png"
+      "image": "https://cdn.arctracker.io/items/v2/rattler_ii.png",
+      "ammoType": "Medium Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "remote_raider_flare": {
       "id": "remote_raider_flare",
@@ -816,7 +864,11 @@
       "name": "Renegade I",
       "rarity": "Rare",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/renegade_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/renegade_i.png",
+      "ammoType": "Medium Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "riven_tides_hotel_keycard_no_107": {
       "id": "riven_tides_hotel_keycard_no_107",
@@ -956,7 +1008,11 @@
       "name": "Stitcher II",
       "rarity": "Common",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/stitcher_ii.png"
+      "image": "https://cdn.arctracker.io/items/v2/stitcher_ii.png",
+      "ammoType": "Light Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "surge_shield_recharger": {
       "id": "surge_shield_recharger",
@@ -998,7 +1054,11 @@
       "name": "Venator I",
       "rarity": "Rare",
       "category": "Weapon",
-      "image": "https://cdn.arctracker.io/items/v2/venator_i.png"
+      "image": "https://cdn.arctracker.io/items/v2/venator_i.png",
+      "ammoType": "Medium Ammo",
+      "ammoSource": "weapon_ammo_rule",
+      "stackSize": 1,
+      "stackSource": "weapon_single_item_rule"
     },
     "very_comfortable_pillow": {
       "id": "very_comfortable_pillow",
@@ -1056,5 +1116,6 @@
       "category": "Other",
       "image": "https://cdn.arctracker.io/items/v2/zipline.png"
     }
-  }
+  },
+  "weaponAmmoUpdatedAt": "2026-05-15T14:05:32.377676"
 }

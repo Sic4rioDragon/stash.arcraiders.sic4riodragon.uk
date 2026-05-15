@@ -736,3 +736,7 @@ td {
 .inventory-grid {
   align-items: stretch;
 }
+
+.item-icon .qty-badge {
+  display: none;
+}
