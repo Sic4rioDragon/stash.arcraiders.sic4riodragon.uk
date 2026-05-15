@@ -195,31 +195,12 @@ function getAllItems() {
 }
 
 function getStackSize(item) {
-  const id = String(item.id || "").toLowerCase();
-  const name = String(item.name || "").toLowerCase();
-  const category = String(item.category || "").toLowerCase();
+  const meta = getMeta(item.id);
+  const stackSize = Number(meta.stackSize || 0);
 
-  const metaStack = Number(getMeta(item.id).stackSize || 0);
-  if (metaStack > 0) return metaStack;
+  if (stackSize > 0) return stackSize;
 
-  if (id.includes("ammo") || name.includes("ammo")) return 100;
-
-  if (
-    name.includes("grenade") ||
-    name.includes("bandage") ||
-    name.includes("shot") ||
-    name.includes("recharger") ||
-    name.includes("mine") ||
-    name.includes("trap") ||
-    category.includes("medical") ||
-    category.includes("consumable")
-  ) {
-    return 5;
-  }
-
-  if (name.includes("powercell")) return 3;
-
-  return Math.max(1, item.quantity);
+  return null;
 }
 
 function splitIntoGameStacks(item) {
@@ -235,6 +216,18 @@ function splitIntoGameStacks(item) {
   }
 
   const stackSize = getStackSize(item);
+
+  // Unknown max stack. Keep it as one card instead of guessing wrong.
+  if (!stackSize) {
+    return [
+      makeItem(item.id, item.quantity, {
+        stackIndex: null,
+        totalQuantity: item.quantity,
+        notes: "Stack size unknown",
+      }),
+    ];
+  }
+
   const stacks = [];
   let remaining = item.quantity;
   let index = 1;
@@ -432,6 +425,8 @@ function createItemCard(item, compact = false) {
 
   if (item.stackIndex) {
     subtitle.textContent = `Stack ${item.stackIndex} • Total ${item.totalQuantity.toLocaleString()}`;
+  } else if (item.notes) {
+    subtitle.textContent = item.notes;
   } else {
     subtitle.textContent = item.id;
   }
