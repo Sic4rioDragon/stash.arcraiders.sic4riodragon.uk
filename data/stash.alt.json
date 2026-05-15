@@ -6,12 +6,10 @@
   "summary": {
     "rawStacksParsed": 280,
     "uniqueItems": 140,
-    "totalQuantity": 2949
+    "totalQuantity": 2949,
+  "inventoryValue": "583.4K"
   },
   "currencies": {
-    "credits": "1.4M",
-    "cred": "9 / 800",
-    "raiderTokens": 25,
     "level": 13
   },
   "items": {

@@ -5,7 +5,6 @@ const state = {
   search: "",
   category: "all",
   rarity: "all",
-  ownedOnly: true,
 };
 
 const config = {
@@ -24,7 +23,6 @@ const els = {
   searchInput: document.querySelector("#searchInput"),
   categoryFilter: document.querySelector("#categoryFilter"),
   rarityFilter: document.querySelector("#rarityFilter"),
-  ownedOnly: document.querySelector("#ownedOnly"),
 
   profileTitle: document.querySelector("#profileTitle"),
   lastUpdated: document.querySelector("#lastUpdated"),
@@ -39,6 +37,15 @@ const els = {
   loadoutGrid: document.querySelector("#loadoutGrid"),
 };
 
+const RARITY_ORDER = {
+  Legendary: 0,
+  Epic: 1,
+  Rare: 2,
+  Uncommon: 3,
+  Common: 4,
+  Unknown: 9,
+};
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -46,15 +53,6 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
-}
-
-function slugify(value) {
-  return String(value || "")
-    .toLowerCase()
-    .trim()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/^_+|_+$/g, "");
 }
 
 function firstLetters(name) {
@@ -94,6 +92,7 @@ async function loadData() {
 
     state.core = normalizeCore(core);
     state.stash = normalizeStash(stash);
+
     render();
   } catch (err) {
     console.error(err);
@@ -105,17 +104,13 @@ async function loadData() {
 }
 
 function normalizeCore(input) {
-  const items = input?.items || {};
-
   return {
     version: input?.version || 1,
-    items,
+    items: input?.items || {},
   };
 }
 
 function normalizeStash(input) {
-  // New slim account format:
-  // { profile:"alt", displayName:"Alt", items:{item_id: quantity}, loadout:{...} }
   if (input?.items && !Array.isArray(input.items)) {
     return {
       version: input.version || 2,
@@ -123,34 +118,23 @@ function normalizeStash(input) {
       displayName: input.displayName || "Alt",
       updatedAt: input.updatedAt || new Date().toISOString(),
       summary: input.summary || {},
-      currencies: input.currencies || {},
       items: input.items || {},
-      flags: input.flags || {},
+      order: Array.isArray(input.order) ? input.order : [],
+      stacks: input.stacks || {},
       loadout: input.loadout || {},
     };
   }
 
-  // Older profile format support.
-  const alt = input?.profiles?.alt || input?.profiles?.main || null;
-  const items = {};
-
-  if (Array.isArray(alt?.items)) {
-    for (const item of alt.items) {
-      const id = item.id || slugify(item.name);
-      items[id] = Number(item.quantity ?? item.qty ?? item.count ?? 0);
-    }
-  }
-
   return {
-    version: input?.version || 1,
+    version: 2,
     profile: "alt",
     displayName: "Alt",
-    updatedAt: input?.updatedAt || new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
     summary: {},
-    currencies: {},
-    items,
-    flags: {},
-    loadout: alt?.loadout || {},
+    items: {},
+    order: [],
+    stacks: {},
+    loadout: {},
   };
 }
 
@@ -164,24 +148,138 @@ function getMeta(id) {
   };
 }
 
+function getOrderedIds() {
+  const ids = Object.keys(state.stash?.items || {});
+  const order = Array.isArray(state.stash?.order) ? state.stash.order : [];
+
+  return ids.sort((a, b) => {
+    const ma = getMeta(a);
+    const mb = getMeta(b);
+
+    const ra = RARITY_ORDER[ma.rarity] ?? RARITY_ORDER.Unknown;
+    const rb = RARITY_ORDER[mb.rarity] ?? RARITY_ORDER.Unknown;
+
+    if (ra !== rb) return ra - rb;
+
+    const ia = order.includes(a) ? order.indexOf(a) : Number.MAX_SAFE_INTEGER;
+    const ib = order.includes(b) ? order.indexOf(b) : Number.MAX_SAFE_INTEGER;
+
+    if (ia !== ib) return ia - ib;
+
+    return String(ma.name || a).localeCompare(String(mb.name || b));
+  });
+}
+
+function makeItem(id, quantity, extra = {}) {
+  const meta = getMeta(id);
+
+  return {
+    id,
+    name: meta.name || id,
+    quantity: Number(quantity || 0),
+    rarity: meta.rarity || "Unknown",
+    category: meta.category || "Other",
+    image: meta.image || "",
+    stackIndex: extra.stackIndex ?? null,
+    totalQuantity: extra.totalQuantity ?? Number(quantity || 0),
+    notes: extra.notes || "",
+  };
+}
+
 function getAllItems() {
   if (!state.stash?.items) return [];
 
-  return Object.entries(state.stash.items).map(([id, quantity]) => {
-    const meta = getMeta(id);
+  return getOrderedIds()
+    .map((id) => makeItem(id, state.stash.items[id]))
+    .filter((item) => item.quantity > 0);
+}
 
-    return {
-      id,
-      name: meta.name || id,
-      quantity: Number(quantity || 0),
-      rarity: meta.rarity || "Unknown",
-      category: meta.category || "Other",
-      notes: "",
-      image: meta.image || "",
-      needed: state.stash.flags?.needed?.includes(id) || false,
-      safe: state.stash.flags?.safeToRecycle?.includes(id) || false,
-    };
+function getStackSize(item) {
+  const id = String(item.id || "").toLowerCase();
+  const name = String(item.name || "").toLowerCase();
+  const category = String(item.category || "").toLowerCase();
+
+  const metaStack = Number(getMeta(item.id).stackSize || 0);
+  if (metaStack > 0) return metaStack;
+
+  if (id.includes("ammo") || name.includes("ammo")) return 100;
+
+  if (
+    name.includes("grenade") ||
+    name.includes("bandage") ||
+    name.includes("shot") ||
+    name.includes("recharger") ||
+    name.includes("mine") ||
+    name.includes("trap") ||
+    category.includes("medical") ||
+    category.includes("consumable")
+  ) {
+    return 5;
+  }
+
+  if (name.includes("powercell")) return 3;
+
+  return Math.max(1, item.quantity);
+}
+
+function splitIntoGameStacks(item) {
+  const customStacks = state.stash?.stacks?.[item.id];
+
+  if (Array.isArray(customStacks) && customStacks.length) {
+    return customStacks
+      .map((qty, index) => makeItem(item.id, qty, {
+        stackIndex: index + 1,
+        totalQuantity: item.quantity,
+      }))
+      .filter((stack) => stack.quantity > 0);
+  }
+
+  const stackSize = getStackSize(item);
+  const stacks = [];
+  let remaining = item.quantity;
+  let index = 1;
+
+  while (remaining > 0) {
+    const qty = Math.min(stackSize, remaining);
+
+    stacks.push(makeItem(item.id, qty, {
+      stackIndex: index,
+      totalQuantity: item.quantity,
+    }));
+
+    remaining -= qty;
+    index += 1;
+  }
+
+  return stacks;
+}
+
+function getDisplayedItems() {
+  const merged = getAllItems();
+
+  const filtered = merged.filter((item) => {
+    const q = state.search.trim().toLowerCase();
+
+    if (q) {
+      const haystack = [
+        item.name,
+        item.id,
+        item.rarity,
+        item.category,
+      ].join(" ").toLowerCase();
+
+      if (!haystack.includes(q)) return false;
+    }
+
+    if (state.category !== "all" && item.category !== state.category) return false;
+    if (state.rarity !== "all" && item.rarity !== state.rarity) return false;
+
+    return true;
   });
+
+  if (state.view !== "stacks") return filtered;
+
+  return filtered.flatMap(splitIntoGameStacks);
 }
 
 function normalizeLoadoutEntry(entry) {
@@ -201,19 +299,9 @@ function pushLoadout(out, slot, entry) {
   const normalized = normalizeLoadoutEntry(entry);
   if (!normalized?.id) return;
 
-  const meta = getMeta(normalized.id);
-
-  out.push({
-    id: normalized.id,
-    name: meta.name || normalized.id,
-    quantity: normalized.quantity,
-    rarity: meta.rarity || "Unknown",
-    category: slot,
+  out.push(makeItem(normalized.id, normalized.quantity, {
     notes: slot,
-    image: meta.image || "",
-    needed: state.stash.flags?.needed?.includes(normalized.id) || false,
-    safe: state.stash.flags?.safeToRecycle?.includes(normalized.id) || false,
-  });
+  }));
 }
 
 function getLoadoutItems() {
@@ -242,39 +330,10 @@ function getLoadoutItems() {
   return out;
 }
 
-function getFilteredItems() {
-  return getAllItems()
-    .filter((item) => {
-      if (state.ownedOnly && item.quantity <= 0) return false;
-
-      const q = state.search.trim().toLowerCase();
-      if (q) {
-        const haystack = [
-          item.name,
-          item.id,
-          item.rarity,
-          item.category,
-          item.notes,
-        ].join(" ").toLowerCase();
-
-        if (!haystack.includes(q)) return false;
-      }
-
-      if (state.category !== "all" && item.category !== state.category) return false;
-      if (state.rarity !== "all" && item.rarity !== state.rarity) return false;
-
-      return true;
-    })
-    .sort((a, b) => {
-      if (b.quantity !== a.quantity) return b.quantity - a.quantity;
-      return a.name.localeCompare(b.name);
-    });
-}
-
 function renderProfileTabs() {
   els.profileTabs.innerHTML = "";
 
-  const itemCount = getAllItems().filter((item) => item.quantity > 0).length;
+  const itemCount = getAllItems().length;
   const btn = document.createElement("button");
 
   btn.className = "profile-tab active";
@@ -321,28 +380,27 @@ function renderFilters() {
 
 function renderStats(items) {
   const allItems = getAllItems();
-  const owned = allItems.filter((item) => item.quantity > 0);
-  const totalQuantity = owned.reduce((sum, item) => sum + item.quantity, 0);
+  const totalQuantity = allItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  els.totalItems.textContent = owned.length.toLocaleString();
+  els.totalItems.textContent = allItems.length.toLocaleString();
   els.totalQuantity.textContent = totalQuantity.toLocaleString();
 
   els.profileTitle.textContent = state.stash?.displayName || "Alt";
-
-  const currency = state.stash?.currencies || {};
-  const currencyBits = [];
-
-  if (currency.credits) currencyBits.push(`${currency.credits} credits`);
-  if (currency.raiderTokens !== undefined) currencyBits.push(`${currency.raiderTokens} tokens`);
-  if (currency.level !== undefined) currencyBits.push(`level ${currency.level}`);
 
   const date = state.stash?.updatedAt ? new Date(state.stash.updatedAt) : null;
   const dateText = date && !Number.isNaN(date.getTime())
     ? `Last updated: ${date.toLocaleString()}`
     : "Loaded stash data";
 
-  const source = currencyBits.length ? ` • ${currencyBits.join(" • ")}` : "";
-  els.lastUpdated.textContent = `${dateText} • Showing ${items.length} item types${source}`;
+  const value = state.stash?.summary?.inventoryValue
+    ? ` • Inventory value: ${state.stash.summary.inventoryValue}`
+    : "";
+
+  const mode = state.view === "stacks"
+    ? ` • Showing ${items.length} game stacks`
+    : ` • Showing ${items.length} item types`;
+
+  els.lastUpdated.textContent = `${dateText}${mode}${value}`;
 }
 
 function createItemCard(item, compact = false) {
@@ -361,9 +419,6 @@ function createItemCard(item, compact = false) {
   card.dataset.itemId = item.id;
   card.classList.toggle("compact", compact);
 
-  if (item.needed) card.classList.add("is-needed");
-  if (item.safe) card.classList.add("is-safe");
-
   const badge = `<span class="qty-badge">${Number(item.quantity || 0).toLocaleString()}</span>`;
 
   if (item.image) {
@@ -374,7 +429,12 @@ function createItemCard(item, compact = false) {
   }
 
   title.textContent = item.name;
-  subtitle.textContent = item.notes || item.id;
+
+  if (item.stackIndex) {
+    subtitle.textContent = `Stack ${item.stackIndex} • Total ${item.totalQuantity.toLocaleString()}`;
+  } else {
+    subtitle.textContent = item.id;
+  }
 
   rarity.textContent = item.rarity;
   rarity.classList.add(rarityClass(item.rarity));
@@ -417,7 +477,7 @@ function renderTable(items) {
       <td>${Number(item.quantity || 0).toLocaleString()}</td>
       <td>${escapeHtml(item.rarity)}</td>
       <td>${escapeHtml(item.category)}</td>
-      <td>${item.needed ? "Needed " : ""}${item.safe ? "Safe to recycle" : ""}</td>
+      <td>${escapeHtml(item.id)}</td>
     `;
 
     els.inventoryTable.appendChild(tr);
@@ -426,7 +486,7 @@ function renderTable(items) {
 
 function renderEmpty(hasData) {
   els.emptyState.classList.toggle("hidden", hasData);
-  els.inventoryGrid.classList.toggle("hidden", !hasData || state.view !== "grid");
+  els.inventoryGrid.classList.toggle("hidden", !hasData || state.view === "table");
   els.inventoryTableWrap.classList.toggle("hidden", !hasData || state.view !== "table");
 }
 
@@ -442,12 +502,12 @@ function render() {
   renderProfileTabs();
   renderFilters();
 
-  const items = getFilteredItems();
+  const items = getDisplayedItems();
 
   renderStats(items);
-  renderLoadout();
   renderGrid(items);
   renderTable(items);
+  renderLoadout();
   renderEmpty(hasData);
   renderViewTabs();
 }
@@ -493,11 +553,6 @@ function bindEvents() {
 
   els.rarityFilter.addEventListener("change", () => {
     state.rarity = els.rarityFilter.value;
-    render();
-  });
-
-  els.ownedOnly.addEventListener("change", () => {
-    state.ownedOnly = els.ownedOnly.checked;
     render();
   });
 

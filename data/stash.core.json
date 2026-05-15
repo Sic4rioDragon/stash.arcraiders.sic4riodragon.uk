@@ -563,7 +563,8 @@
       "name": "Light Ammo",
       "rarity": "Common",
       "category": "Ammunition",
-      "image": "https://cdn.arctracker.io/items/v2/light_ammo.png"
+      "image": "https://cdn.arctracker.io/items/v2/light_ammo.png",
+      "stackSize": 100
     },
     "light_bulb": {
       "id": "light_bulb",

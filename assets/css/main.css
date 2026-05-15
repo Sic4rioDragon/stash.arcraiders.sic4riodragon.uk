@@ -699,3 +699,40 @@ a.btn {
 .item-card.compact .item-bottom {
   margin-top: 10px;
 }
+.item-card h3,
+.item-top p,
+td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.item-card h3 {
+  line-height: 1.2;
+}
+
+.item-top {
+  min-width: 0;
+}
+
+.item-top > div:last-child {
+  min-width: 0;
+}
+
+.item-card.is-needed,
+.item-card.is-safe {
+  border-color: var(--border);
+}
+
+.item-card.is-needed::before,
+.item-card.is-safe::before {
+  content: none;
+  display: none;
+}
+
+.view-tabs {
+  flex-wrap: wrap;
+}
+
+.inventory-grid {
+  align-items: stretch;
+}

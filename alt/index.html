@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="icon" href="https://sic4riodragon.uk/assets/SicarioDragon.png" />
+  <link rel="apple-touch-icon" href="https://sic4riodragon.uk/assets/SicarioDragon.png" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -18,7 +20,6 @@
       <div>
         <p class="eyebrow">ARC Raiders</p>
         <h1>Alt Stash</h1>
-        <p class="subtext">Static stash view loaded from <code>stash.core.json</code> + <code>stash.alt.json</code>.</p>
       </div>
 
       <div class="top-actions">
@@ -72,10 +73,6 @@
             Owned only
           </label>
         </div>
-
-        <div class="hint">
-          Core stores item names/images/rarity/category. Alt JSON only stores quantities, flags, currencies, and loadout.
-        </div>
       </aside>
 
       <section class="content">
@@ -87,19 +84,10 @@
           </div>
 
           <div class="view-tabs">
-            <button class="view-tab active" data-view="grid">Grid</button>
+            <button class="view-tab active" data-view="grid">Merged</button>
+            <button class="view-tab" data-view="stacks">Game stacks</button>
             <button class="view-tab" data-view="table">Table</button>
           </div>
-        </section>
-
-        <section id="loadoutSection" class="card loadout-section hidden">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">Loadout</p>
-              <h2>Equipped / carried</h2>
-            </div>
-          </div>
-          <div id="loadoutGrid" class="loadout-grid"></div>
         </section>
 
         <section id="emptyState" class="card empty-state hidden">
@@ -119,11 +107,22 @@
                 <th>Qty</th>
                 <th>Rarity</th>
                 <th>Category</th>
-                <th>Flags</th>
+                <th>ID</th>
               </tr>
             </thead>
             <tbody id="inventoryTable"></tbody>
           </table>
+        </section>
+
+        
+        <section id="loadoutSection" class="card loadout-section hidden">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Alt account</p>
+              <h2>Loadout</h2>
+            </div>
+          </div>
+          <div id="loadoutGrid" class="loadout-grid"></div>
         </section>
       </section>
     </main>
