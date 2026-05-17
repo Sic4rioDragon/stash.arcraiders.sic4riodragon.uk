@@ -1115,7 +1115,27 @@
       "rarity": "Rare",
       "category": "Other",
       "image": "https://cdn.arctracker.io/items/v2/zipline.png"
-    }
+    },
+    "free_loadout_augment": {
+    "id": "free_loadout_augment",
+    "name": "Free Loadout Augment",
+    "rarity": "Common",
+    "category": "Augment",
+    "image": "https://cdn.arctracker.io/items/v2/free_loadout_augment.png",
+    "stackSize": 1,
+    "stackSource": "single_item_rule"
+  },
+  "rattler_iii": {
+    "id": "rattler_iii",
+    "name": "Rattler III",
+    "rarity": "Common",
+    "category": "Weapon",
+    "image": "https://cdn.arctracker.io/items/v2/rattler_iii.png",
+    "ammoType": "Medium Ammo",
+    "ammoSource": "weapon_ammo_rule",
+    "stackSize": 1,
+    "stackSource": "weapon_single_item_rule"
+  }
   },
   "weaponAmmoUpdatedAt": "2026-05-15T14:05:32.377676"
 }
