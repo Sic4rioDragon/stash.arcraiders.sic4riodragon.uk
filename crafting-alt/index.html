@@ -6,10 +6,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Main Stash - Sic4rio ARC Stash</title>
-  <meta name="description" content="Main stash tracker for ARC Raiders." />
+  <title>Crafting Alt - Sic4rio ARC Stash</title>
+  <meta name="description" content="Crafting alt stash tracker for ARC Raiders." />
 
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
   <div class="page-bg"></div>
@@ -19,15 +19,15 @@
     <header class="topbar">
       <div>
         <p class="eyebrow">ARC Raiders</p>
-        <h1>Main Stash</h1>
-        <p class="subtext">Main account stash snapshot, loadout, and searchable item list.</p>
+        <h1>Crafting Alt</h1>
+        <p class="subtext">Crafting alt account stash snapshot, loadout, and searchable item list.</p>
       </div>
 
       <div class="top-actions">
         <a class="btn" href="https://arcraiders.sic4riodragon.uk/">Back</a>
-        <a class="btn primary" href="crafting-alt/">Crafting Alt</a>
-        <a class="btn" href="data/stash.main.json" target="_blank" rel="noopener">Open main JSON</a>
-        <a class="btn" href="data/stash.core.json" target="_blank" rel="noopener">Open core JSON</a>
+        <a class="btn primary" href="../">Main stash</a>
+        <a class="btn" href="../data/stash.crafting-alt.json" target="_blank" rel="noopener">Open crafting alt JSON</a>
+        <a class="btn" href="../data/stash.core.json" target="_blank" rel="noopener">Open core JSON</a>
         <button id="reloadBtn" class="btn">Reload data</button>
         <button id="exportBtn" class="btn">Export backup</button>
       </div>
@@ -86,7 +86,7 @@
         <section class="card hero-card">
           <div>
             <p class="eyebrow">Current stash</p>
-            <h2 id="profileTitle">Main</h2>
+            <h2 id="profileTitle">Crafting Alt</h2>
             <p id="lastUpdated" class="subtext">Loading...</p>
           </div>
 
@@ -100,7 +100,7 @@
         <section id="emptyState" class="card empty-state hidden">
           <h2>No stash data found</h2>
           <p>
-            Check that <code>data/stash.core.json</code> and <code>data/stash.main.json</code> exist.
+            Check that <code>data/stash.core.json</code> and <code>data/stash.crafting-alt.json</code> exist.
           </p>
         </section>
 
@@ -124,7 +124,7 @@
         <section id="loadoutSection" class="card loadout-section hidden">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Main account</p>
+              <p class="eyebrow">Crafting alt account</p>
               <h2>Loadout</h2>
             </div>
           </div>
@@ -160,17 +160,17 @@
 
   <script>
     window.STASH_CONFIG = {
-      pageTitle: "Main",
-      profileKey: "main",
-      coreFile: "data/stash.core.json",
-      stashFile: "data/stash.main.json",
-      exportPrefix: "arc-stash-main",
+      pageTitle: "Crafting Alt",
+      profileKey: "crafting-alt",
+      coreFile: "../data/stash.core.json",
+      stashFile: "../data/stash.crafting-alt.json",
+      exportPrefix: "arc-stash-crafting-alt",
       profileLinks: [
-        { key: "main", label: "Main", href: "./" },
-        { key: "crafting-alt", label: "Crafting Alt", href: "crafting-alt/" }
+        { key: "main", label: "Main", href: "../" },
+        { key: "crafting-alt", label: "Crafting Alt", href: "./" }
       ]
     };
   </script>
-  <script src="assets/js/app.js"></script>
+  <script src="../assets/js/app.js"></script>
 </body>
 </html>

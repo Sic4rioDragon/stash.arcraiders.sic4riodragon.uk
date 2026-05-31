@@ -8,9 +8,14 @@ const state = {
 };
 
 const config = {
-  pageTitle: window.STASH_CONFIG?.pageTitle || "Alt",
-  coreFile: window.STASH_CONFIG?.coreFile || "../data/stash.core.json",
-  stashFile: window.STASH_CONFIG?.stashFile || "../data/stash.alt.json",
+  pageTitle: window.STASH_CONFIG?.pageTitle || "Main",
+  profileKey: window.STASH_CONFIG?.profileKey || "main",
+  coreFile: window.STASH_CONFIG?.coreFile || "data/stash.core.json",
+  stashFile: window.STASH_CONFIG?.stashFile || "data/stash.main.json",
+  exportPrefix: window.STASH_CONFIG?.exportPrefix || "arc-stash",
+  profileLinks: Array.isArray(window.STASH_CONFIG?.profileLinks)
+    ? window.STASH_CONFIG.profileLinks
+    : [],
 };
 
 const els = {
@@ -111,11 +116,14 @@ function normalizeCore(input) {
 }
 
 function normalizeStash(input) {
+  const fallbackProfile = config.profileKey || "main";
+  const fallbackName = config.pageTitle || "Main";
+
   if (input?.items && !Array.isArray(input.items)) {
     return {
       version: input.version || 2,
-      profile: input.profile || "alt",
-      displayName: input.displayName || "Alt",
+      profile: input.profile || fallbackProfile,
+      displayName: input.displayName || fallbackName,
       updatedAt: input.updatedAt || new Date().toISOString(),
       summary: input.summary || {},
       items: input.items || {},
@@ -127,8 +135,8 @@ function normalizeStash(input) {
 
   return {
     version: 2,
-    profile: "alt",
-    displayName: "Alt",
+    profile: fallbackProfile,
+    displayName: fallbackName,
     updatedAt: new Date().toISOString(),
     summary: {},
     items: {},
@@ -326,17 +334,31 @@ function getLoadoutItems() {
 function renderProfileTabs() {
   els.profileTabs.innerHTML = "";
 
-  const itemCount = getAllItems().length;
-  const btn = document.createElement("button");
+  const currentKey = state.stash?.profile || config.profileKey;
+  const currentCount = getAllItems().length;
+  const links = config.profileLinks.length
+    ? config.profileLinks
+    : [{ key: currentKey, label: state.stash?.displayName || config.pageTitle, href: "#" }];
 
-  btn.className = "profile-tab active";
-  btn.type = "button";
-  btn.innerHTML = `
-    <strong>${escapeHtml(state.stash?.displayName || "Alt")}</strong>
-    <span>${itemCount} items</span>
-  `;
+  for (const link of links) {
+    const isActive = link.key === currentKey;
+    const node = document.createElement(link.href && !isActive ? "a" : "button");
 
-  els.profileTabs.appendChild(btn);
+    node.className = `profile-tab${isActive ? " active" : ""}`;
+
+    if (node.tagName === "A") {
+      node.href = link.href;
+    } else {
+      node.type = "button";
+    }
+
+    node.innerHTML = `
+      <strong>${escapeHtml(link.label || link.key || "Profile")}</strong>
+      <span>${isActive ? `${currentCount.toLocaleString()} items` : "Open"}</span>
+    `;
+
+    els.profileTabs.appendChild(node);
+  }
 }
 
 function renderFilters() {
@@ -378,7 +400,7 @@ function renderStats(items) {
   els.totalItems.textContent = allItems.length.toLocaleString();
   els.totalQuantity.textContent = totalQuantity.toLocaleString();
 
-  els.profileTitle.textContent = state.stash?.displayName || "Alt";
+  els.profileTitle.textContent = state.stash?.displayName || config.pageTitle || "Main";
 
   const date = state.stash?.updatedAt ? new Date(state.stash.updatedAt) : null;
   const dateText = date && !Number.isNaN(date.getTime())
@@ -534,7 +556,7 @@ function bindEvents() {
       return;
     }
 
-    downloadJson(`arc-stash-alt-${new Date().toISOString().slice(0, 10)}.json`, state.stash);
+    downloadJson(`${config.exportPrefix}-${new Date().toISOString().slice(0, 10)}.json`, state.stash);
   });
 
   els.searchInput.addEventListener("input", () => {

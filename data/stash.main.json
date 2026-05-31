@@ -1,0 +1,486 @@
+{
+  "version": 2,
+  "profile": "main",
+  "displayName": "Main",
+  "sourceProfile": "Sic4rioDragon",
+  "updatedAt": "2026-05-24T00:00:00Z",
+  "summary": {
+    "slotsUsed": 272,
+    "slotsMax": 280,
+    "inventoryValue": "1.1M",
+    "rawStacksParsed": 159,
+    "uniqueItems": 132,
+    "totalQuantity": 911
+  },
+  "items": {
+    "snap_hook": 1,
+    "bastion_cell": 3,
+    "buried_city_town_hall_key": 1,
+    "complex_gun_parts": 3,
+    "dam_control_tower_key": 1,
+    "hullcracker_i": 1,
+    "hullcracker_iii": 1,
+    "hullcracker_iv": 1,
+    "ion_sputter": 1,
+    "lightweight_stock": 1,
+    "looting_mk3_cautious": 1,
+    "photoelectric_cloak": 1,
+    "power_rod": 4,
+    "rocketeer_driver": 3,
+    "vita_spray": 1,
+    "wolfpack": 1,
+    "velocity_ship_model": 1,
+    "advanced_arc_powercell": 7,
+    "advanced_electrical_components": 1,
+    "advanced_mechanical_components": 6,
+    "angled_grip_iii": 1,
+    "antiseptic": 8,
+    "arc_circuitry": 7,
+    "arc_coolant": 5,
+    "arc_flex_rubber": 5,
+    "arc_motion_core": 7,
+    "arc_performance_steel": 3,
+    "arc_synthetic_resin": 4,
+    "bicycle_pump": 1,
+    "buried_city_hospital_key": 1,
+    "comet_igniter": 1,
+    "compensator_iii": 1,
+    "coolant": 4,
+    "cooling_coil": 3,
+    "cracked_bioscanner": 3,
+    "dam_testing_annex_key": 1,
+    "damaged_heat_sink": 1,
+    "defibrillator": 3,
+    "extended_medium_mag_iii": 1,
+    "fine_wristwatch": 1,
+    "firefly_burner": 1,
+    "fireworks_box": 1,
+    "frying_pan": 1,
+    "heavy_gun_parts": 3,
+    "humidifier": 2,
+    "laboratory_reagents": 1,
+    "light_gun_parts": 9,
+    "looting_mk2": 1,
+    "medium_gun_parts": 6,
+    "mod_components": 7,
+    "polluted_air_filter": 1,
+    "processor": 6,
+    "raider_hatch_key": 1,
+    "rocket_thruster": 1,
+    "ruined_accordion": 1,
+    "rusted_shut_medical_kit": 2,
+    "sensors": 2,
+    "sentinel_firing_core": 1,
+    "shredder_gyro": 3,
+    "silencer_ii": 1,
+    "smoke_grenade": 1,
+    "spaceport_container_storage_key": 1,
+    "speaker_component": 5,
+    "stable_stock_iii": 1,
+    "stella_montis_security_checkpoint_key": 1,
+    "sterilized_bandage": 3,
+    "surge_shield_recharger": 5,
+    "surveyor_vault": 5,
+    "synthesized_fuel": 1,
+    "toaster": 3,
+    "wasp_driver": 1,
+    "water_pump": 3,
+    "zipline": 3,
+    "twilight_compass_ship_model": 1,
+    "air_freshener": 1,
+    "anvil_iii": 1,
+    "arc_alloy": 15,
+    "battery": 13,
+    "burned_arc_circuitry": 1,
+    "camera_lens": 1,
+    "canister": 9,
+    "cat_bed": 5,
+    "crude_explosives": 4,
+    "dam_surveillance_key": 1,
+    "deflated_football": 1,
+    "dockmasters_detector": 1,
+    "duct_tape": 11,
+    "durable_cloth": 9,
+    "electrical_components": 14,
+    "extended_medium_mag_ii": 1,
+    "fireball_burner": 5,
+    "flame_spray": 1,
+    "il_toro_i": 1,
+    "light_bulb": 3,
+    "light_shield": 1,
+    "looting_mk1": 1,
+    "magnet": 16,
+    "mechanical_components": 11,
+    "mushroom": 4,
+    "oil": 3,
+    "patrol_car_key": 1,
+    "roots": 6,
+    "rusted_bolts": 3,
+    "seeker_grenade": 5,
+    "shield_recharger": 5,
+    "simple_gun_parts": 14,
+    "spaceport_trench_tower_key": 1,
+    "spotter_relay": 1,
+    "stable_stock_ii": 1,
+    "steel_spring": 2,
+    "stella_montis_assembly_admin_key": 1,
+    "white_flag": 1,
+    "wires": 26,
+    "arc_powercell": 5,
+    "assorted_seeds": 111,
+    "bandage": 5,
+    "burletta_blueprint": 1,
+    "chemicals": 54,
+    "defibrillator_blueprint": 1,
+    "fabric": 98,
+    "ferro_iv": 1,
+    "firecracker": 5,
+    "heavy_ammo": 40,
+    "heavy_gun_parts_blueprint": 1,
+    "light_gun_parts_blueprint": 1,
+    "metal_parts": 51,
+    "plastic_parts": 41,
+    "riven_tides_hotel_keycard_no_107": 1,
+    "rubber_parts": 86,
+    "seeker_grenade_blueprint": 1,
+    "shotgun_ammo": 20,
+    "trigger_nade_blueprint": 1
+  },
+  "order": [
+    "snap_hook",
+    "bastion_cell",
+    "buried_city_town_hall_key",
+    "complex_gun_parts",
+    "dam_control_tower_key",
+    "hullcracker_i",
+    "hullcracker_iii",
+    "hullcracker_iv",
+    "ion_sputter",
+    "lightweight_stock",
+    "looting_mk3_cautious",
+    "photoelectric_cloak",
+    "power_rod",
+    "rocketeer_driver",
+    "vita_spray",
+    "wolfpack",
+    "velocity_ship_model",
+    "advanced_arc_powercell",
+    "advanced_electrical_components",
+    "advanced_mechanical_components",
+    "angled_grip_iii",
+    "antiseptic",
+    "arc_circuitry",
+    "arc_coolant",
+    "arc_flex_rubber",
+    "arc_motion_core",
+    "arc_performance_steel",
+    "arc_synthetic_resin",
+    "bicycle_pump",
+    "buried_city_hospital_key",
+    "comet_igniter",
+    "compensator_iii",
+    "coolant",
+    "cooling_coil",
+    "cracked_bioscanner",
+    "dam_testing_annex_key",
+    "damaged_heat_sink",
+    "defibrillator",
+    "extended_medium_mag_iii",
+    "fine_wristwatch",
+    "firefly_burner",
+    "fireworks_box",
+    "frying_pan",
+    "heavy_gun_parts",
+    "humidifier",
+    "laboratory_reagents",
+    "light_gun_parts",
+    "looting_mk2",
+    "medium_gun_parts",
+    "mod_components",
+    "polluted_air_filter",
+    "processor",
+    "raider_hatch_key",
+    "rocket_thruster",
+    "ruined_accordion",
+    "rusted_shut_medical_kit",
+    "sensors",
+    "sentinel_firing_core",
+    "shredder_gyro",
+    "silencer_ii",
+    "smoke_grenade",
+    "spaceport_container_storage_key",
+    "speaker_component",
+    "stable_stock_iii",
+    "stella_montis_security_checkpoint_key",
+    "sterilized_bandage",
+    "surge_shield_recharger",
+    "surveyor_vault",
+    "synthesized_fuel",
+    "toaster",
+    "wasp_driver",
+    "water_pump",
+    "zipline",
+    "twilight_compass_ship_model",
+    "air_freshener",
+    "anvil_iii",
+    "arc_alloy",
+    "battery",
+    "burned_arc_circuitry",
+    "camera_lens",
+    "canister",
+    "cat_bed",
+    "crude_explosives",
+    "dam_surveillance_key",
+    "deflated_football",
+    "dockmasters_detector",
+    "duct_tape",
+    "durable_cloth",
+    "electrical_components",
+    "extended_medium_mag_ii",
+    "fireball_burner",
+    "flame_spray",
+    "il_toro_i",
+    "light_bulb",
+    "light_shield",
+    "looting_mk1",
+    "magnet",
+    "mechanical_components",
+    "mushroom",
+    "oil",
+    "patrol_car_key",
+    "roots",
+    "rusted_bolts",
+    "seeker_grenade",
+    "shield_recharger",
+    "simple_gun_parts",
+    "spaceport_trench_tower_key",
+    "spotter_relay",
+    "stable_stock_ii",
+    "steel_spring",
+    "stella_montis_assembly_admin_key",
+    "white_flag",
+    "wires",
+    "arc_powercell",
+    "assorted_seeds",
+    "bandage",
+    "burletta_blueprint",
+    "chemicals",
+    "defibrillator_blueprint",
+    "fabric",
+    "ferro_iv",
+    "firecracker",
+    "heavy_ammo",
+    "heavy_gun_parts_blueprint",
+    "light_gun_parts_blueprint",
+    "metal_parts",
+    "plastic_parts",
+    "riven_tides_hotel_keycard_no_107",
+    "rubber_parts",
+    "seeker_grenade_blueprint",
+    "shotgun_ammo",
+    "trigger_nade_blueprint"
+  ],
+  "stacks": {
+    "power_rod": [
+      3,
+      1
+    ],
+    "advanced_arc_powercell": [
+      5,
+      2
+    ],
+    "advanced_mechanical_components": [
+      5,
+      1
+    ],
+    "antiseptic": [
+      5,
+      3
+    ],
+    "arc_circuitry": [
+      5,
+      2
+    ],
+    "arc_coolant": [
+      3,
+      2
+    ],
+    "arc_flex_rubber": [
+      3,
+      2
+    ],
+    "arc_motion_core": [
+      5,
+      2
+    ],
+    "arc_synthetic_resin": [
+      3,
+      1
+    ],
+    "coolant": [
+      3,
+      1
+    ],
+    "light_gun_parts": [
+      5,
+      4
+    ],
+    "medium_gun_parts": [
+      5,
+      1
+    ],
+    "mod_components": [
+      5,
+      2
+    ],
+    "processor": [
+      5,
+      1
+    ],
+    "surveyor_vault": [
+      3,
+      2
+    ],
+    "cat_bed": [
+      3,
+      2
+    ],
+    "electrical_components": [
+      10,
+      4
+    ],
+    "fireball_burner": [
+      3,
+      2
+    ],
+    "magnet": [
+      15,
+      1
+    ],
+    "mechanical_components": [
+      10,
+      1
+    ],
+    "simple_gun_parts": [
+      10,
+      4
+    ],
+    "wires": [
+      15,
+      11
+    ],
+    "assorted_seeds": [
+      100,
+      11
+    ],
+    "chemicals": [
+      50,
+      4
+    ],
+    "fabric": [
+      50,
+      48
+    ],
+    "metal_parts": [
+      50,
+      1
+    ],
+    "rubber_parts": [
+      50,
+      36
+    ]
+  },
+  "loadout": {
+    "augment": {
+      "id": "looting_mk2",
+      "quantity": 1
+    },
+    "shield": {
+      "id": "light_shield",
+      "quantity": 1
+    },
+    "weapons": [
+      {
+        "id": "il_toro_ii",
+        "quantity": 1
+      },
+      {
+        "id": "hullcracker_iv",
+        "quantity": 1
+      }
+    ],
+    "quickUse": [
+      {
+        "id": "bandage",
+        "quantity": 3
+      },
+      {
+        "id": "shield_recharger",
+        "quantity": 5
+      },
+      {
+        "id": "zipline",
+        "quantity": 1
+      },
+      {
+        "id": "adrenaline_shot",
+        "quantity": 4
+      }
+    ],
+    "safePocket": [],
+    "backpack": [
+      {
+        "id": "shotgun_ammo",
+        "quantity": 20
+      },
+      {
+        "id": "shotgun_ammo",
+        "quantity": 20
+      },
+      {
+        "id": "launcher_ammo",
+        "quantity": 24
+      },
+      {
+        "id": "launcher_ammo",
+        "quantity": 24
+      },
+      {
+        "id": "launcher_ammo",
+        "quantity": 24
+      },
+      {
+        "id": "launcher_ammo",
+        "quantity": 24
+      },
+      {
+        "id": "adrenaline_shot",
+        "quantity": 5
+      },
+      {
+        "id": "shield_recharger",
+        "quantity": 5
+      },
+      {
+        "id": "bandage",
+        "quantity": 5
+      },
+      {
+        "id": "herbal_bandage",
+        "quantity": 3
+      },
+      {
+        "id": "bandage",
+        "quantity": 5
+      },
+      {
+        "id": "defibrillator",
+        "quantity": 1
+      },
+      {
+        "id": "shotgun_ammo",
+        "quantity": 6
+      }
+    ]
+  }
+}

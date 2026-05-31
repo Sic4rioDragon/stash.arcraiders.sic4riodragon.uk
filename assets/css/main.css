@@ -740,3 +740,28 @@ td {
 .item-icon .qty-badge {
   display: none;
 }
+
+.trade-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 0 22px;
+  padding: 20px 22px;
+  background: linear-gradient(135deg, rgba(224, 170, 79, 0.14), rgba(16, 20, 30, 0.82));
+}
+
+.trade-banner h2 {
+  margin-bottom: 6px;
+}
+
+.profile-tab[href] {
+  text-decoration: none;
+}
+
+@media (max-width: 720px) {
+  .trade-banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
